@@ -1,24 +1,25 @@
-let pass = document.getElementById("password");
-let msg = document.getElementById("massage");
-let str = document.getElementById("strength");
+let countDownDate = new Date("April 21, 2025 00:00:00").getTime();
+let x = setInterval(function () {
+  let now = new Date().getTime();
+  let distance = countDownDate - now;
 
-pass.addEventListener("input", () => {
-  if (pass.value.length > 0) {
-    msg.style.display = "block";
-  } else {
-    msg.style.display = "none";
+
+  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("days").innerHTML = days;
+  document.getElementById("hours").innerHTML = hours;
+  document.getElementById("minutes").innerHTML = minutes;
+  document.getElementById("seconds").innerHTML = seconds;
+  
+  if (distance < 0){
+    clearInterval(x)
+    
+  document.getElementById("days").innerHTML = "00";
+  document.getElementById("hours").innerHTML = "00";
+  document.getElementById("minutes").innerHTML = "00";
+  document.getElementById("seconds").innerHTML = "00";
   }
-  if (pass.value.length < 4) {
-    str.innerHTML = "weak";
-    pass.style.borderColor = "#ff5925";
-    pass.style.color = "#ff5925";
-  } else if (pass.value.length >= 4 && pass.value.length < 8) {
-    str.innerHTML = "medium";
-    pass.style.borderColor = "yellow";
-    pass.style.color = "yellow";
-  } else if (pass.value.length >= 8) {
-    str.innerHTML = "strong";
-    pass.style.borderColor = "#26d730";
-    pass.style.color = "#26d730";
-  }
-});
+}, 1000);
